@@ -1,13 +1,35 @@
 package br.kinimodev.com.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Matricula {
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
+@Entity
+public class Matricula implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String ano;
+	
+    @Column(name="Ano", nullable=false)
+    private Long ano;
+    
+    @Column(name="Ativo", nullable=false)
     private Boolean ativo;
+    
+    @Column(name="Numero",unique=true, nullable=false)
     private String numero;
+   
+    @Temporal(TemporalType.DATE)
+    @Column(name="emissao", nullable=false)
     private Date emissao;
 
     public Long getId() {
@@ -18,11 +40,11 @@ public class Matricula {
         this.id = id;
     }
 
-    public String getAno() {
+    public Long getAno() {
         return ano;
     }
 
-    public void setAno(String ano) {
+    public void setAno(Long ano) {
         this.ano = ano;
     }
 
@@ -49,4 +71,5 @@ public class Matricula {
     public void setEmissao(Date emissao) {
         this.emissao = emissao;
     }
+    
 }
